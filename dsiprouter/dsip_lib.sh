@@ -202,7 +202,7 @@ isInstanceDO() {
 # returns: 0 == success, 1 == failure
 # notes: try to access the GCE metadata URL to determine if this is an Google instance
 isInstanceGCE() {
-    curl -s -f --connect-timeout 2 http://metadata.google.internal/computeMetadata/v1/; ret=$?
+    curl -s -f --connect-timeout 2 -H "Metadata-Flavor: Google" http://metadata.google.internal/computeMetadata/v1/; ret=$?
     if (( $ret != 22 )) && (( $ret != 28 )); then
         return 0
     fi
@@ -212,7 +212,7 @@ isInstanceGCE() {
 # returns: 0 == success, 1 == failure
 # notes: try to access the MS Azure metadata URL to determine if this is an Azure instance
 isInstanceAZURE() {
-    curl -s -f --connect-timeout 2 -H Metadata:true "http://169.254.169.254/metadata/instance?api-version=2018-10-01"; ret=$?
+    curl -s -f --connect-timeout 2 -H "Metadata: true" "http://169.254.169.254/metadata/instance?api-version=2018-10-01"; ret=$?
     if (( $ret != 22 )) && (( $ret != 28 )); then
         return 0
     fi
@@ -222,25 +222,26 @@ isInstanceAZURE() {
 # TODO: support digital ocean and google cloud and microsoft azure
 # $1 == -aws | -do | -gce | -azure
 # returns: instance ID || blank string
+# notes: options avoid wait time instead of querying each time to find type
 getInstanceID() {
-#    # TODO: find out what we use as id for each provider (will be set to password)
-#    # TODO: find out how to query that information for that provider
-#    case "$1" in
-#        -aws)
-#            ;;
-#        -do)
-#            ;;
-#        -gce)
-#            ;;
-#        -azure)
-#            ;;
-#        *)
-#            printf ''
-#            ;;
-#    esac
-
-    curl http://169.254.169.254/latest/meta-data/instance-id 2>/dev/null ||
-    ec2-metadata -i 2>/dev/null
+    case "$1" in
+        -aws)
+            curl http://169.254.169.254/latest/meta-data/instance-id 2>/dev/null ||
+            ec2-metadata -i 2>/dev/null
+            ;;
+        -do)
+            curl http://169.254.169.254/metadata/v1/id 2>/dev/null
+            ;;
+        -gce)
+            curl -H "Metadata-Flavor: Google" http://metadata.google.internal/computeMetadata/v1/instance/id 2>/dev/null
+            ;;
+        -azure)
+            curl -H "Metadata: true" "http://169.254.169.254/metadata/instance/compute/vmId?api-version=2018-10-01" 2>/dev/null
+            ;;
+        *)
+            printf ''
+            ;;
+    esac
 }
 
 # $1 == crontab entry to append
