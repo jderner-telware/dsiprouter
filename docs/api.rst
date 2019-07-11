@@ -123,24 +123,24 @@ Inbound Mapping Valid commands
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 --------------------------
-GET /api/v1/inboundmapping
+GET /api/v1/InboundMapping
 --------------------------
 
 .. code-block:: bash
 
-    curl -X GET -H "Authorization: Bearer ${token}" "http://demo.dsiprouter.org:5000/api/v1/inboundmapping"
-    curl -X GET -H "Authorization: Bearer ${token}" "http://demo.dsiprouter.org:5000/api/v1/inboundmapping?ruleid=3"
-    curl -X GET -H "Authorization: Bearer ${token}" "http://demo.dsiprouter.org:5000/api/v1/inboundmapping?did=1313"
+    curl -X GET -H "Authorization: Bearer ${DSIP_TOKEN}" "http://demo.dsiprouter.org:5000/api/v1/InboundMapping"
+    curl -X GET -H "Authorization: Bearer ${DSIP_TOKEN}" "http://demo.dsiprouter.org:5000/api/v1/InboundMapping?ruleid=3"
+    curl -X GET -H "Authorization: Bearer ${DSIP_TOKEN}" "http://demo.dsiprouter.org:5000/api/v1/InboundMapping?did=1313"
 
 ---------------------------
-POST /api/v1/inboundmapping
+POST /api/v1/InboundMapping
 ---------------------------
 
 .. code-block:: bash
 
-    curl -X POST -H "Authorization: Bearer ${token}" --connect-timeout 3 -H "Content-Type: application/json" "http://demo.dsiprouter.org:5000/api/v1/inboundmapping" -d '{"did": "1313", "servers": ["66","67"], "notes": "1313 DID Mapping"}'
-    curl -X POST -H "Authorization: Bearer ${token}" --connect-timeout 3 -H "Content-Type: application/json" "http://demo.dsiprouter.org:5000/api/v1/inboundmapping" -d '{"did": "1313","servers": ["66","67"]}'
-    curl -X POST -H "Authorization: Bearer ${token}" --connect-timeout 3 -H "Content-Type: application/json" "http://demo.dsiprouter.org:5000/api/v1/inboundmapping" -d '{"did": "", "servers": ["66"], "notes": "Default DID Mapping"}'
+    curl -X POST -H "Authorization: Bearer ${DSIP_TOKEN}" --connect-timeout 3 -H "Content-Type: application/json" "http://demo.dsiprouter.org:5000/api/v1/InboundMapping" -d '{"did": "1313", "servers": ["66","67"], "notes": "1313 DID Mapping"}'
+    curl -X POST -H "Authorization: Bearer ${DSIP_TOKEN}" --connect-timeout 3 -H "Content-Type: application/json" "http://demo.dsiprouter.org:5000/api/v1/InboundMapping" -d '{"did": "1313","servers": ["66","67"]}'
+    curl -X POST -H "Authorization: Bearer ${DSIP_TOKEN}" --connect-timeout 3 -H "Content-Type: application/json" "http://demo.dsiprouter.org:5000/api/v1/InboundMapping" -d '{"did": "", "servers": ["66"], "notes": "Default DID Mapping"}'
 
 ---------------------------
 PUT /api/v1/inboundmapping
@@ -148,17 +148,17 @@ PUT /api/v1/inboundmapping
 
 .. code-block:: bash
 
-    curl -X PUT -H "Authorization: Bearer ${token}" --connect-timeout 3 -H "Content-Type: application/json" "http://demo.dsiprouter.org:5000/api/v1/inboundmapping?ruleid=3" -d '{"did": "01234", "notes": "01234 DID Mapping"}'
-    curl -X PUT -H "Authorization: Bearer ${token}" --connect-timeout 3 -H "Content-Type: application/json" "http://demo.dsiprouter.org:5000/api/v1/inboundmapping?did=1313" -d '{"servers": ["67"]}'
-    curl -X PUT -H "Authorization: Bearer ${token}" --connect-timeout 3 -H "Content-Type: application/json" "http://demo.dsiprouter.org:5000/api/v1/inboundmapping?did=1313" -d '{"did": "01234", "notes": "01234 DID Mapping"}'
+    curl -X PUT -H "Authorization: Bearer ${DSIP_TOKEN}" --connect-timeout 3 -H "Content-Type: application/json" "http://demo.dsiprouter.org:5000/api/v1/InboundMapping?ruleid=3" -d '{"did": "01234", "notes": "01234 DID Mapping"}'
+    curl -X PUT -H "Authorization: Bearer ${DSIP_TOKEN}" --connect-timeout 3 -H "Content-Type: application/json" "http://demo.dsiprouter.org:5000/api/v1/InboundMapping?did=1313" -d '{"servers": ["67"]}'
+    curl -X PUT -H "Authorization: Bearer ${DSIP_TOKEN}" --connect-timeout 3 -H "Content-Type: application/json" "http://demo.dsiprouter.org:5000/api/v1/InboundMapping?did=1313" -d '{"did": "01234", "notes": "01234 DID Mapping"}'
 
 -------------------------------
-DELETE /api/v1/inboundmapping
+DELETE /api/v1/InboundMapping
 -------------------------------
 
 .. code-block:: bash
 
-    curl -X DELETE -H "Authorization: Bearer ${token}" "http://demo.dsiprouter.org:5000/api/v1/inboundmapping?ruleid=3"
-    curl -X DELETE -H "Authorization: Bearer ${token}" "http://demo.dsiprouter.org:5000/api/v1/inboundmapping?did=1313"
+    curl -X DELETE -H "Authorization: Bearer ${DSIP_TOKEN}" "http://demo.dsiprouter.org:5000/api/v1/InboundMapping?ruleid=3"
+    curl -X DELETE -H "Authorization: Bearer ${DSIP_TOKEN}" "http://demo.dsiprouter.org:5000/api/v1/InboundMapping?did=1313"
 
 
